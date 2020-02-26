@@ -17,9 +17,9 @@ namespace TheCustomAnalyzeService.Controllers
         // POST: api/Analyzer/analyze
 
         [HttpPost("analyze")]
-        public IActionResult Analyze([FromForm] IFormFile file, [FromForm] int chartLenght)
+        public IActionResult Analyze([FromForm] IFormFile file, [FromForm] int chartLength)
         {
-            if (file == null || chartLenght <= 0)
+            if (file == null || chartLength <= 0)
             {
                 return Ok(new JsonErrorMessage { message = "Ошибка. Ожидается Headers: Content-Type:application/x-www-form-urlencoded; Body (form-data): file:{Путь к файлу} & chartLenght:{Количество слов в топе}" });
             }
@@ -62,14 +62,14 @@ namespace TheCustomAnalyzeService.Controllers
                     {
                         countOfWordRepeats++;
                     }
-                }
+                } 
 
-                theStat.Add(new WordStatistic { Word = word, CountOfRepeats = countOfWordRepeats });
+                theStat.Add(new WordStatistic { Word = word, CountOfRepeats = countOfWordRepeats });;
             }
 
-            var result = theStat.OrderByDescending(stat => stat.CountOfRepeats).Take(chartLenght);
+            var result = theStat.OrderByDescending(stat => stat.CountOfRepeats).Take(chartLength);
 
-            return Ok(new JsonSuccessMessage<WordStatistic> { message = $"Определен набор самых повторяющихся слов в файле. Длина набора: {chartLenght}", data = result });
+            return Ok(new JsonSuccessMessage<WordStatistic> { message = $"Определен набор самых повторяющихся слов в файле. Длина набора: {chartLength}", data = result });
         }
 
     }
