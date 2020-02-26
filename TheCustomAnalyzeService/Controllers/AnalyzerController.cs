@@ -14,7 +14,7 @@ namespace TheCustomAnalyzeService.Controllers
     [ApiController]
     public class AnalyzerController : ControllerBase
     {
-        // POST: api/Analyzer/upload
+        // POST: api/Analyzer/analyze
 
         [HttpPost("analyze")]
         public IActionResult Analyze([FromForm] IFormFile file, [FromForm] int chartLenght)
